@@ -1,36 +1,27 @@
 package com.example.abk03_03dessert
 
 import android.content.ActivityNotFoundException
-import android.content.ContentValues.TAG
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import com.example.abk03_03dessert.databinding.ActivityMainBinding
+
+const val KEY_REVENUE = "revenue_key"
+const val KEY_DESSERT_SOLD = "dessert_sold_key"
+const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
     private var revenue = 0
     private var dessertsSold = 0
-
-    // Contains all the views
     private lateinit var binding: ActivityMainBinding
 
-
-    /** Dessert Data **/
-
-    /**
-     * Simple data class that represents a dessert. Includes the resource id integer associated with
-     * the image, the price it's sold for, and the startProductionAmount, which determines when
-     * the dessert starts to be produced.
-     */
-    data class Dessert(val imageId: Int, val price: Int, val startProductionAmount: Int)
-
-    // Create a list of all desserts, in order of when they start being produced
     private val allDesserts = listOf(
         Dessert(R.drawable.cupcake, 5, 0),
         Dessert(R.drawable.donut, 10, 5),
@@ -46,69 +37,52 @@ class MainActivity : AppCompatActivity() {
         Dessert(R.drawable.nougat, 5000, 16000),
         Dessert(R.drawable.oreo, 6000, 20000)
     )
+
     private var currentDessert = allDesserts[0]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("MainActivity", "onCreate Called")
+        Log.d(TAG, "onCreate Called")
 
-        // Use Data Binding to get reference to the views
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         binding.dessertButton.setOnClickListener {
             onDessertClicked()
         }
 
-        // Set the TextViews to the right values
         binding.revenue = revenue
         binding.amountSold = dessertsSold
-
-        // Make sure the correct dessert is showing
         binding.dessertButton.setImageResource(currentDessert.imageId)
+
+        if (savedInstanceState != null) {
+            revenue = savedInstanceState.getInt(KEY_REVENUE, 0)
+            dessertsSold = savedInstanceState.getInt(KEY_DESSERT_SOLD, 0)
+            showCurrentDessert()
+        }
     }
 
-    /**
-     * Updates the score when the dessert is clicked. Possibly shows a new dessert.
-     */
     private fun onDessertClicked() {
-
-        // Update the score
         revenue += currentDessert.price
         dessertsSold++
 
         binding.revenue = revenue
         binding.amountSold = dessertsSold
-
-        // Show the next dessert
         showCurrentDessert()
     }
 
-    /**
-     * Determine which dessert to show.
-     */
     private fun showCurrentDessert() {
         var newDessert = allDesserts[0]
         for (dessert in allDesserts) {
             if (dessertsSold >= dessert.startProductionAmount) {
                 newDessert = dessert
-            }
-            // The list of desserts is sorted by startProductionAmount. As you sell more desserts,
-            // you'll start producing more expensive desserts as determined by startProductionAmount
-            // We know to break as soon as we see a dessert who's "startProductionAmount" is greater
-            // than the amount sold.
-            else break
+            } else break
         }
 
-        // If the new dessert is actually different than the current dessert, update the image
         if (newDessert != currentDessert) {
             currentDessert = newDessert
             binding.dessertButton.setImageResource(newDessert.imageId)
         }
     }
 
-    /**
-     * Menu methods
-     */
     private fun onShare() {
         val shareIntent = ShareCompat.IntentBuilder.from(this)
             .setText(getString(R.string.share_text, dessertsSold, revenue))
@@ -117,8 +91,10 @@ class MainActivity : AppCompatActivity() {
         try {
             startActivity(shareIntent)
         } catch (ex: ActivityNotFoundException) {
-            Toast.makeText(this, getString(R.string.sharing_not_available),
-                Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this, getString(R.string.sharing_not_available),
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -165,11 +141,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
+        super.onSaveInstanceState(outState )
         Log.d(TAG, "onSaveInstanceState Called")
+        outState.putInt(KEY_REVENUE, revenue)
+        outState.putInt(KEY_DESSERT_SOLD, dessertsSold)
     }
-
-
-
 }
