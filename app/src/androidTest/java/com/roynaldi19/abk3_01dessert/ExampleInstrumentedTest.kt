@@ -1,4 +1,4 @@
-package com.example.abk03_03dessert
+package com.roynaldi19.abk3_01dessert
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

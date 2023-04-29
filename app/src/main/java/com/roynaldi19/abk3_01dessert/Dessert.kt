@@ -1,4 +1,4 @@
-package com.example.abk03_03dessert
+package com.roynaldi19.abk3_01dessert
 
 data class Dessert(
     val imageId: Int,

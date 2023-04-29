@@ -1,8 +1,7 @@
-package com.example.abk03_03dessert
+package com.roynaldi19.abk3_01dessert
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -10,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
-import com.example.abk03_03dessert.databinding.ActivityMainBinding
+import com.roynaldi19.abk3_01dessert.databinding.ActivityMainBinding
 
 const val KEY_REVENUE = "revenue_key"
 const val KEY_DESSERT_SOLD = "dessert_sold_key"
