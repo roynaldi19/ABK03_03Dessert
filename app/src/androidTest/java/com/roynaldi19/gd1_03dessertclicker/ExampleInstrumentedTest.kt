@@ -1,4 +1,4 @@
-package com.roynaldi19.abk3_01dessert
+package com.roynaldi19.gd1_03dessertclicker
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

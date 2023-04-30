@@ -1,4 +1,4 @@
-package com.roynaldi19.abk3_01dessert
+package com.roynaldi19.gd1_03dessertclicker
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
-import com.roynaldi19.abk3_01dessert.databinding.ActivityMainBinding
+import com.roynaldi19.gd1_03dessertclicker.databinding.ActivityMainBinding
 
 const val KEY_REVENUE = "revenue_key"
 const val KEY_DESSERT_SOLD = "dessert_sold_key"

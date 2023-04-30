@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.roynaldi19.abk3_01dessert"
+        applicationId "com.roynaldi19.gd1_03dessertclicker"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

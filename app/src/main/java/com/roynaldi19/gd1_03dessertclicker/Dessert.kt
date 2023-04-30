@@ -1,4 +1,4 @@
-package com.roynaldi19.abk3_01dessert
+package com.roynaldi19.gd1_03dessertclicker
 
 data class Dessert(
     val imageId: Int,
