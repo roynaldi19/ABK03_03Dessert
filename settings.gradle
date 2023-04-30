@@ -1,2 +1,2 @@
-rootProject.name = "GD1_03Dessert"
+rootProject.name = "GD1_03DessertClicker"
 include ':app'
